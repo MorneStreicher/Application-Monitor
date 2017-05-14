@@ -7,3 +7,4 @@ CREATE TABLE applications
 	name 		VARCHAR(50) NULL 		DEFAULT NULL,
 	entity 		VARCHAR(50) NULL 		DEFAULT NULL
 ) ENGINE=InnoDB;
+
