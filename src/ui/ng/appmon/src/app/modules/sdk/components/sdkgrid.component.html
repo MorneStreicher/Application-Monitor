@@ -1,0 +1,9 @@
+<div [ngClass]="showToolDiv ? 'grid-div-show-toolbar' : 'grid-div-hide-toolbar'">
+  <ag-grid-angular #agGrid style="width: 100%; height: 100%;" class="ag-fresh">
+  </ag-grid-angular>
+</div>
+
+<div #toolDiv [ngClass]="showToolDiv ? 'tool-div-show-toolbar' : 'tool-div-hide-toolbar'">
+  <button md-button [disabled]="leftButtonDisabled" (click)="leftButtonClick()"><md-icon>keyboard_arrow_left</md-icon> Previous</button>
+  <button md-button [disabled]="rightButtonDisabled" (click)="rightButtonClick()">Next <md-icon>keyboard_arrow_right</md-icon></button>
+</div>

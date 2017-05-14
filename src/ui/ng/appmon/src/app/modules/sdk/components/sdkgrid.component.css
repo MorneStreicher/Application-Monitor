@@ -1,0 +1,27 @@
+.grid-div-show-toolbar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 35px;
+}
+
+.tool-div-show-toolbar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  height: 35px;
+  bottom: 0;
+}
+
+.grid-div-hide-toolbar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+
+.tool-div-hide-toolbar {
+  display: none;
+}
