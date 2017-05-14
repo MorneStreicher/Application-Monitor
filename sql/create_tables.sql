@@ -8,3 +8,4 @@ CREATE TABLE applications
 	entity 		VARCHAR(50) NULL 		DEFAULT NULL
 ) ENGINE=InnoDB;
 
+
