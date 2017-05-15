@@ -1,6 +1,6 @@
-from spark.web.services.ServiceRegistry import ServiceRegistry
+from appmon.web.services.ServiceRegistry import ServiceRegistry
 
-import spark.web.services.impl.Datasource_Application_Entity
+import appmon.web.services.impl.Datasource_Application_Entity
 
 class RegisterAllServices(object):
 
@@ -13,5 +13,5 @@ class RegisterAllServices(object):
             ServiceRegistry.SERVICE_TYPE_DATASOURCE,
             "Application",
             "Entity",
-            spark.web.services.impl.Datasource_Application_Entity.Service)
+            appmon.web.services.impl.Datasource_Application_Entity.Service)
 

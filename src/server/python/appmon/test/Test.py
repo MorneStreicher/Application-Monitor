@@ -1,5 +1,5 @@
-from spark.db.DBEntities import DBEntities
-from spark.db.DBSession import DBSession
+from appmon.db.DBEntities import DBEntities
+from appmon.db.DBSession import DBSession
 
 with DBSession.session_scope() as session:
     list = session.query(DBEntities.Application).all()

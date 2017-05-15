@@ -1,8 +1,9 @@
-from spark.web.services.impl.RegisterAllServices import RegisterAllServices
-from spark.web.services.ServiceRegistry import ServiceRegistry
+from appmon.web.services.impl.RegisterAllServices import RegisterAllServices
+from appmon.web.services.ServiceRegistry import ServiceRegistry
 import cherrypy
 import traceback
 import json
+import os
 
 
 class Root(object):
@@ -60,8 +61,7 @@ class ServiceHandler(object):
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps(result)
 
-
-if __name__ == '__main__':
+def start_server():
     conf = {
         '/': {
             'tools.sessions.on': True
@@ -81,5 +81,10 @@ if __name__ == '__main__':
     root = Root()
     root.service = ServiceHandler()
 
-    cherrypy.config.update("cherrypy.config")
+    dn = os.path.dirname(os.path.realpath(__file__))
+    fn = os.path.join(dn, "cherrypy.config")
+    cherrypy.config.update(fn)
     cherrypy.quickstart(root, '/', conf)
+
+if __name__ == '__main__':
+    start_server()

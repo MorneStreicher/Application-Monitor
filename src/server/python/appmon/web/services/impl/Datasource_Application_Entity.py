@@ -1,4 +1,4 @@
-from spark.web.services.ServiceBase import DatasourceService, DatasourceQueryResult
+from appmon.web.services.ServiceBase import DatasourceService, DatasourceQueryResult
 import time
 
 class Service(DatasourceService):
