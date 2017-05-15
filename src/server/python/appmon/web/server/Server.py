@@ -1,9 +1,11 @@
-from appmon.web.services.impl.RegisterAllServices import RegisterAllServices
-from appmon.web.services.ServiceRegistry import ServiceRegistry
-import cherrypy
-import traceback
 import json
 import os
+import traceback
+
+import cherrypy
+
+from appmon.web.services.ServiceRegistry import ServiceRegistry
+from appmon.web.services.impl.RegisterAllServices import RegisterAllServices
 
 
 class Root(object):
