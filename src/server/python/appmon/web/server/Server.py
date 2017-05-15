@@ -62,13 +62,16 @@ class ServiceHandler(object):
         return json.dumps(result)
 
 def start_server():
+    dn = os.path.dirname(os.path.realpath(__file__))
+
     conf = {
         '/': {
             'tools.sessions.on': True
         },
-        '/static': {
+        '/': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': 'c:\\temp'
+            'tools.staticdir.dir': os.path.join(dn, "..", "..", "..", "..", "..", "ui", "ng", "appmon", "dist"),
+            'tools.staticdir.index': 'index.html'
         },
         '/service': {
             'request.dispatch': cherrypy.dispatch.MethodDispatcher()
@@ -81,7 +84,6 @@ def start_server():
     root = Root()
     root.service = ServiceHandler()
 
-    dn = os.path.dirname(os.path.realpath(__file__))
     fn = os.path.join(dn, "cherrypy.config")
     cherrypy.config.update(fn)
     cherrypy.quickstart(root, '/', conf)

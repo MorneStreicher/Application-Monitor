@@ -58,7 +58,7 @@ export class Datasource implements IDatasource {
       let body = JSON.stringify(value);
       let headers = new Headers({ 'Content-Type': 'application/json'});
       let options = new RequestOptions({ headers: headers });
-      this.http.post(`http://localhost:8085/service/Datasource/${this.name}/${this.entity}/query`, body, headers).subscribe(
+      this.http.post(`/service/Datasource/${this.name}/${this.entity}/query`, body, headers).subscribe(
         (data:Response) => {
           // For Success Response
           result.fromResponse(data, start_index);
