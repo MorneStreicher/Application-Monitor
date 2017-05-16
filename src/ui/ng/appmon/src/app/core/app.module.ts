@@ -6,16 +6,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MdButtonModule, MdCheckboxModule, MdToolbarModule, MdIconModule, MdSidenavModule } from '@angular/material';
 
+import { AppComponent } from './app.component';
+
 import { SdkModule } from "../modules/sdk/sdk.module";
 import { ApplicationsModule } from "../modules/applications/applications.module";
 import { ApplicationsComponent } from "../modules/applications/applications.component";
 
-import { AppComponent } from './app.component';
-
 const appRoutes: Routes = [
-  { path: 'applications', component: ApplicationsComponent },
+  {
+    path: 'applications',
+    component: ApplicationsComponent },
 
-  { path: '',
+  {
+    path: '',
     redirectTo: '/applications',
     pathMatch: 'full'
   },

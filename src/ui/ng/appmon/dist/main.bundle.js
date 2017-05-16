@@ -22,12 +22,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-let ApplicationsComponent = class ApplicationsComponent {
-    constructor(datasource_service_factory) {
+var ApplicationsComponent = (function () {
+    function ApplicationsComponent(datasource_service_factory) {
         this.datasource_service_factory = datasource_service_factory;
     }
-    ngOnInit() {
-        let gridOptions;
+    ApplicationsComponent.prototype.ngOnInit = function () {
+        var gridOptions;
         gridOptions = {
             rowSelection: 'single',
             getRowStyle: function (params) {
@@ -59,12 +59,13 @@ let ApplicationsComponent = class ApplicationsComponent {
             }
         ];
         this.grid.agGrid.gridOptions = gridOptions;
-        let datasource = this.datasource_service_factory.getFor("Application", "Entity");
-        let dataset = new __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__["a" /* DataSet */](datasource);
-        this.grid.setRowCount(100);
+        var datasource = this.datasource_service_factory.getFor("Application", "Entity");
+        var dataset = new __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__["a" /* DataSet */](datasource);
+        this.grid.setRowCount(300);
         this.grid.setDataSet(dataset);
-    }
-};
+    };
+    return ApplicationsComponent;
+}());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('grid'),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__["a" /* SdkGridComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__["a" /* SdkGridComponent */]) === "function" && _a || Object)
@@ -101,59 +102,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-let SdkGridComponent = class SdkGridComponent {
-    constructor() {
+var SdkGridComponent = (function () {
+    function SdkGridComponent() {
         this.leftButtonDisabled = true;
         this.rightButtonDisabled = true;
         this.showToolDiv = true;
         this.start_index = 0;
         this.row_count = null;
     }
-    ngOnInit() {
-        this.agGrid.rowSelected.subscribe((o) => {
-            this.agGrid.api.refreshRows([o.node]);
+    SdkGridComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.agGrid.rowSelected.subscribe(function (o) {
+            _this.agGrid.api.refreshRows([o.node]);
         });
-        this.agGrid.rowDoubleClicked.subscribe((o) => {
+        this.agGrid.rowDoubleClicked.subscribe(function (o) {
             console.log(o);
         });
-    }
-    setRowCount(count) {
+    };
+    SdkGridComponent.prototype.setRowCount = function (count) {
         this.row_count = count;
-    }
-    setDataSet(dataset) {
+    };
+    SdkGridComponent.prototype.setDataSet = function (dataset) {
+        var _this = this;
         this.dataset = dataset;
-        this.dataset.datasetLoaded.subscribe((queryResult) => {
-            this.populateGrid();
-            this.agGrid.api.hideOverlay();
+        this.dataset.datasetLoaded.subscribe(function (queryResult) {
+            _this.populateGrid();
+            _this.agGrid.api.hideOverlay();
         });
         dataset.query(0, this.row_count);
-    }
-    populateGrid() {
-        let r = this.dataset.getDatasourceQueryResult();
-        let rowData = r.records;
+    };
+    SdkGridComponent.prototype.populateGrid = function () {
+        var r = this.dataset.getDatasourceQueryResult();
+        var rowData = r.records;
         this.agGrid.api.setRowData(rowData);
         this.setPagingButtons(r.has_more_records, r.has_previous_records);
-    }
-    setPagingButtons(has_more_records, has_previous_records) {
+    };
+    SdkGridComponent.prototype.setPagingButtons = function (has_more_records, has_previous_records) {
         this.rightButtonDisabled = !has_more_records;
         this.leftButtonDisabled = !has_previous_records;
-    }
-    rightButtonClick() {
+    };
+    SdkGridComponent.prototype.rightButtonClick = function () {
         this.setPagingButtons(false, false);
-        let r = this.dataset.getDatasourceQueryResult();
+        var r = this.dataset.getDatasourceQueryResult();
         this.start_index = this.start_index + (r ? r.records.length.valueOf() : 0);
         this.agGrid.api.showLoadingOverlay();
         this.dataset.query(this.start_index, this.row_count);
-    }
-    leftButtonClick() {
+    };
+    SdkGridComponent.prototype.leftButtonClick = function () {
         this.setPagingButtons(false, false);
-        let r = this.dataset.getDatasourceQueryResult();
+        var r = this.dataset.getDatasourceQueryResult();
         this.start_index = this.start_index - (this.row_count ? this.row_count.valueOf() : 0);
         this.start_index = this.start_index < 0 ? 0 : this.start_index;
         this.agGrid.api.showLoadingOverlay();
         this.dataset.query(this.start_index, this.row_count);
-    }
-};
+    };
+    return SdkGridComponent;
+}());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('agGrid'),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__["AgGridNg2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__["AgGridNg2"]) === "function" && _a || Object)
@@ -200,13 +204,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-let SdkModule = SdkModule_1 = class SdkModule {
-    static forRoot() {
+var SdkModule = SdkModule_1 = (function () {
+    function SdkModule() {
+    }
+    SdkModule.forRoot = function () {
         return {
             ngModule: SdkModule_1
         };
-    }
-};
+    };
+    return SdkModule;
+}());
 SdkModule = SdkModule_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         imports: [
@@ -283,10 +290,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-let AppComponent = class AppComponent {
-    constructor() {
+var AppComponent = (function () {
+    function AppComponent() {
     }
-};
+    return AppComponent;
+}());
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
@@ -311,10 +319,10 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(225);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_material__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_sdk_sdk_module__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_applications_applications_module__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_applications_applications_component__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_sdk_sdk_module__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_applications_applications_module__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_applications_applications_component__ = __webpack_require__(144);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -333,27 +341,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-const appRoutes = [
-    { path: 'applications', component: __WEBPACK_IMPORTED_MODULE_9__modules_applications_applications_component__["a" /* ApplicationsComponent */] },
-    { path: '',
+var appRoutes = [
+    {
+        path: 'applications',
+        component: __WEBPACK_IMPORTED_MODULE_10__modules_applications_applications_component__["a" /* ApplicationsComponent */]
+    },
+    {
+        path: '',
         redirectTo: '/applications',
         pathMatch: 'full'
     },
 ];
-let AppModule = class AppModule {
-};
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* RouterModule */].forRoot(appRoutes),
-            __WEBPACK_IMPORTED_MODULE_7__modules_sdk_sdk_module__["a" /* SdkModule */].forRoot(),
-            __WEBPACK_IMPORTED_MODULE_8__modules_applications_applications_module__["a" /* ApplicationsModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_8__modules_sdk_sdk_module__["a" /* SdkModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_9__modules_applications_applications_module__["a" /* ApplicationsModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
             __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MdButtonModule */],
             __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MdCheckboxModule */],
@@ -363,7 +378,7 @@ AppModule = __decorate([
         ],
         providers: [],
         bootstrap: [
-            __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]
         ]
     })
 ], AppModule);
@@ -391,13 +406,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-let ApplicationsModule = ApplicationsModule_1 = class ApplicationsModule {
-    static forRoot() {
+var ApplicationsModule = ApplicationsModule_1 = (function () {
+    function ApplicationsModule() {
+    }
+    ApplicationsModule.forRoot = function () {
         return {
             ngModule: ApplicationsModule_1
         };
-    }
-};
+    };
+    return ApplicationsModule;
+}());
 ApplicationsModule = ApplicationsModule_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         imports: [
@@ -424,6 +442,7 @@ var ApplicationsModule_1;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_datasource_service__ = __webpack_require__(94);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataSet; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -435,8 +454,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-class DataSet {
-    constructor(datasource) {
+var DataSet = (function () {
+    function DataSet(datasource) {
         this.datasource = datasource;
         this.datasetLoaded = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.selectedIdChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
@@ -445,35 +464,36 @@ class DataSet {
         this.result = new __WEBPACK_IMPORTED_MODULE_1__services_datasource_service__["b" /* DatasourceQueryResult */]();
         this.selectedId = null;
     }
-    setSelectedId(id) {
+    DataSet.prototype.setSelectedId = function (id) {
         if (this.selectedId != id) {
             this.selectedIdChanged.emit(id);
         }
         this.selectedId = id;
-    }
-    getSelectedId() {
+    };
+    DataSet.prototype.getSelectedId = function () {
         return this.selectedId;
-    }
-    query(start_index, count) {
-        this.datasource.query(this.filter, this.order_by, start_index, count).then((result) => {
+    };
+    DataSet.prototype.query = function (start_index, count) {
+        var _this = this;
+        this.datasource.query(this.filter, this.order_by, start_index, count).then(function (result) {
             if (result.success) {
-                this.result = result;
-                this.datasetLoaded.emit(this.result);
-                this.setSelectedId(null);
+                _this.result = result;
+                _this.datasetLoaded.emit(_this.result);
+                _this.setSelectedId(null);
             }
             else {
                 console.error(result);
             }
         });
-    }
-    update(entry) {
+    };
+    DataSet.prototype.update = function (entry) {
         throw "TODO";
-    }
-    getDatasourceQueryResult() {
+    };
+    DataSet.prototype.getDatasourceQueryResult = function () {
         return this.result;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = DataSet;
+    };
+    return DataSet;
+}());
 
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
@@ -491,16 +511,15 @@ __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 // The file contents for the current environment will overwrite these during build.
-const environment = {
+var environment = {
     production: false
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = environment;
-
 //# sourceMappingURL=environment.js.map
 
 /***/ }),
@@ -508,7 +527,7 @@ const environment = {
 /***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(39)();
+exports = module.exports = __webpack_require__(39)(false);
 // imports
 
 
@@ -526,7 +545,7 @@ module.exports = module.exports.toString();
 /***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(39)();
+exports = module.exports = __webpack_require__(39)(false);
 // imports
 
 
@@ -544,7 +563,7 @@ module.exports = module.exports.toString();
 /***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(39)();
+exports = module.exports = __webpack_require__(39)(false);
 // imports
 
 
@@ -594,6 +613,8 @@ module.exports = __webpack_require__(215);
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(93);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DatasourceQueryResult; });
+/* unused harmony export Datasource */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DatasourceFactoryService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -606,8 +627,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-class DatasourceQueryResult {
-    constructor() {
+var DatasourceQueryResult = (function () {
+    function DatasourceQueryResult() {
         this.success = true;
         this.message = null;
         this.records = [];
@@ -615,7 +636,7 @@ class DatasourceQueryResult {
         this.has_previous_records = false;
         this.start_index = 0;
     }
-    fromResponse(response, start_index) {
+    DatasourceQueryResult.prototype.fromResponse = function (response, start_index) {
         if (response.ok) {
             this.success = true;
             this.records = response.json().data.records;
@@ -627,54 +648,57 @@ class DatasourceQueryResult {
             this.success = false;
             this.message = response.statusText;
         }
-    }
-    fromError(error) {
+    };
+    DatasourceQueryResult.prototype.fromError = function (error) {
         this.success = false;
-        this.message = `${error}`;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["b"] = DatasourceQueryResult;
+        this.message = "" + error;
+    };
+    return DatasourceQueryResult;
+}());
 
-class Datasource {
-    constructor(http, name, entity) {
+var Datasource = (function () {
+    function Datasource(http, name, entity) {
         this.http = http;
         this.name = name;
         this.entity = entity;
     }
-    query(dict_filter = {}, order_by, start_index, count) {
-        return new Promise(resolve => {
-            let result = new DatasourceQueryResult();
-            let value = {
+    Datasource.prototype.query = function (dict_filter, order_by, start_index, count) {
+        var _this = this;
+        if (dict_filter === void 0) { dict_filter = {}; }
+        return new Promise(function (resolve) {
+            var result = new DatasourceQueryResult();
+            var value = {
                 "filter": dict_filter,
                 "order_by": order_by,
                 "start_index": start_index,
                 "count": count
             };
-            let body = JSON.stringify(value);
-            let headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]({ 'Content-Type': 'application/json' });
-            let options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
-            this.http.post(`/service/Datasource/${this.name}/${this.entity}/query`, body, headers).subscribe((data) => {
+            var body = JSON.stringify(value);
+            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]({ 'Content-Type': 'application/json' });
+            var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
+            _this.http.post("/service/Datasource/" + _this.name + "/" + _this.entity + "/query", body, headers).subscribe(function (data) {
                 // For Success Response
                 result.fromResponse(data, start_index);
                 resolve(result);
-            }, (err) => {
+            }, function (err) {
                 // For Error Response
                 result.fromError(err);
                 resolve(result);
             });
         });
-    }
-}
-/* unused harmony export Datasource */
+    };
+    return Datasource;
+}());
 
-let DatasourceFactoryService = class DatasourceFactoryService {
-    constructor(http) {
+var DatasourceFactoryService = (function () {
+    function DatasourceFactoryService(http) {
         this.http = http;
     }
-    getFor(name, entity) {
+    DatasourceFactoryService.prototype.getFor = function (name, entity) {
         return new Datasource(this.http, name, entity);
-    }
-};
+    };
+    return DatasourceFactoryService;
+}());
 DatasourceFactoryService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])

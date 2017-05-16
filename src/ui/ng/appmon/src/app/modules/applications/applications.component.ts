@@ -51,7 +51,7 @@ export class ApplicationsComponent {
 
     let datasource = this.datasource_service_factory.getFor("Application", "Entity");
     let dataset = new DataSet(datasource);
-    this.grid.setRowCount(100);
+    this.grid.setRowCount(300);
     this.grid.setDataSet(dataset);
   }
 }

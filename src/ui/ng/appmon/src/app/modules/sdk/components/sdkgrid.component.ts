@@ -14,9 +14,9 @@ export class SdkGridComponent {
   @ViewChild('toolDiv') public toolDiv: HTMLDivElement;
 
   private dataset : DataSet;
-  protected leftButtonDisabled = true;
-  protected rightButtonDisabled = true;
-  protected showToolDiv = true;
+  public leftButtonDisabled = true;
+  public rightButtonDisabled = true;
+  public showToolDiv = true;
 
   private start_index:number;
   private row_count?:Number;
@@ -61,7 +61,7 @@ export class SdkGridComponent {
     this.leftButtonDisabled = !has_previous_records;
   }
 
-  protected rightButtonClick () {
+  public rightButtonClick () {
     this.setPagingButtons(false, false);
     let r = this.dataset.getDatasourceQueryResult();
     this.start_index = this.start_index + (r ?  r.records.length.valueOf() : 0)
@@ -69,7 +69,7 @@ export class SdkGridComponent {
     this.dataset.query(this.start_index, this.row_count);
   }
 
-  protected leftButtonClick () {
+  public leftButtonClick () {
     this.setPagingButtons(false, false);
     let r = this.dataset.getDatasourceQueryResult();
     this.start_index = this.start_index - (this.row_count ? this.row_count.valueOf() : 0)

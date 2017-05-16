@@ -1,7 +1,7 @@
 {
   "name": "appmon",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "1.0.0",
+  "license": "Private",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,7 +28,7 @@
     "zone.js": "^0.8.10"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0",
+    "@angular/cli": "^1.0.0",
     "@angular/compiler-cli": "^4.0.0",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
