@@ -37,14 +37,34 @@ export class ApplicationsComponent {
 
     gridOptions.columnDefs = [
       {
-        headerName: "ID",
-        field: "id",
+        headerName: "App type",
+        field: "app_type",
         width: 100
       },
       {
-        headerName: "Name 2",
+        headerName: "Domain",
+        field: "app_domain",
+        width: 100
+      },
+      {
+        headerName: "Name",
         field: "name",
-        width: 300
+        width: 150
+      },
+      {
+        headerName: "Entity",
+        field: "entity",
+        width: 150
+      },
+      {
+        headerName: "Last heartbeat",
+        field: "last_heartbeat",
+        width: 180
+      },
+      {
+        headerName: "Current Activity",
+        field: "current_activity",
+        width: 250
       }
     ];
     this.grid.agGrid.gridOptions = gridOptions;
@@ -53,5 +73,6 @@ export class ApplicationsComponent {
     let dataset = new DataSet(datasource);
     this.grid.setRowCount(300);
     this.grid.setDataSet(dataset);
+    this.grid.showToolDiv = false;
   }
 }

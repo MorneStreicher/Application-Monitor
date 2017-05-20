@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { GridOptions, GridPanel, RowNode } from "ag-grid";
-import { DatasourceQueryResult, Datasource } from "../services/datasource.service";
+import { DatasourceQueryResult, IDatasource } from "../services/datasource.service";
 import { AgGridNg2 } from "ag-grid-angular";
 import {DataSet} from "../model/dataset";
 
@@ -36,17 +36,23 @@ export class SdkGridComponent {
     });
   }
 
+  ngAfterViewInit() {
+    this.agGrid.api.hideOverlay();
+  }
+
   public setRowCount(count:Number) {
     this.row_count = count;
   }
 
-  public setDataSet(dataset: DataSet) {
+  public setDataSet(dataset: DataSet, query_data:boolean = true) {
     this.dataset = dataset;
     this.dataset.datasetLoaded.subscribe((queryResult:DatasourceQueryResult) => {
       this.populateGrid();
       this.agGrid.api.hideOverlay();
     });
-    dataset.query(0, this.row_count);
+    if (query_data) {
+      dataset.query(0, this.row_count);
+    }
   }
 
   private populateGrid() {

@@ -1,14 +1,24 @@
 import json
 import os
 import traceback
-
+import datetime
 import cherrypy
 
 from appmon.web.services.ServiceRegistry import ServiceRegistry
 from appmon.web.services.impl.RegisterAllServices import RegisterAllServices
 
 
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, datetime.datetime):
+            return o.isoformat()
+        return json.JSONEncoder.default(self, o)
+
 class Root(object):
+    @cherrypy.expose
+    def default(self, *args, **kwargs):
+        raise cherrypy.InternalRedirect('/')
+
     @cherrypy.expose
     def index(self):
         return "Hello World!"
@@ -38,9 +48,9 @@ class ServiceHandler(object):
         method = method or ""
 
         result = {
-            "success":True,
-            "message":None,
-            "data":None
+            "success" : True,
+            "message" : None,
+            "data" : None
         }
         try:
             i = ServiceRegistry.get_service_instance(service_type, service_name, service_entity)
@@ -61,19 +71,20 @@ class ServiceHandler(object):
             result["message"] = traceback.format_exc()
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
-        return json.dumps(result)
+        return json.dumps(result, cls=JSONEncoder)
 
 def start_server():
     dn = os.path.dirname(os.path.realpath(__file__))
 
     conf = {
         '/': {
-            'tools.sessions.on': True
-        },
-        '/': {
+            'tools.sessions.on': True,
+            'tools.gzip.on': True,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': os.path.join(dn, "..", "..", "..", "..", "..", "ui", "ng", "appmon", "dist"),
-            'tools.staticdir.index': 'index.html'
+            'tools.staticdir.index': 'index.html',
+            'tools.expires.on': True,
+            'tools.expires.secs': 0
         },
         '/service': {
             'request.dispatch': cherrypy.dispatch.MethodDispatcher()

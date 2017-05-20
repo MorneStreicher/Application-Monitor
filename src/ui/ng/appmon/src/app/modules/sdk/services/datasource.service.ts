@@ -41,7 +41,7 @@ export interface IDatasource {
   query(dict_filter:object, order_by?:String, start_index?:Number, count?:Number): Promise<DatasourceQueryResult>;
 }
 
-export class Datasource implements IDatasource {
+export class HttpDatasource implements IDatasource {
 
   constructor(private http: Http, private name:String, private entity:String) {
   }
@@ -80,7 +80,7 @@ export class DatasourceFactoryService {
   constructor (private http: Http) {
   }
 
-  getFor(name:String, entity:String) {
-    return new Datasource(this.http, name, entity);
+  getFor(name:String, entity:String) : IDatasource {
+    return new HttpDatasource(this.http, name, entity);
   }
 }

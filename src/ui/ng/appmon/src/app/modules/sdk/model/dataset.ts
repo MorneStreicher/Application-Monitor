@@ -6,6 +6,8 @@ export class DataSet {
   @Output() datasetLoaded = new EventEmitter<DatasourceQueryResult>();
   @Output() selectedIdChanged = new EventEmitter<String>();
 
+  private recordDecorator: (record:any) => void;
+
   filter: object;
   order_by: String;
 
@@ -17,6 +19,12 @@ export class DataSet {
     this.order_by = null;
     this.result = new DatasourceQueryResult();
     this.selectedId = null;
+
+    this.recordDecorator = () => {};
+  }
+
+  setRecordDecorator(callback: (record:any) => void) {
+    this.recordDecorator = callback;
   }
 
   public setSelectedId(id:String) {
@@ -34,6 +42,9 @@ export class DataSet {
     this.datasource.query(this.filter, this.order_by, start_index, count).then((result:DatasourceQueryResult) => {
       if (result.success) {
         this.result = result;
+        this.result.records.forEach(v=>{
+          this.recordDecorator(v);
+        });
         this.datasetLoaded.emit(this.result);
         this.setSelectedId(null);
       } else {

@@ -1,9 +1,9 @@
 <md-sidenav-container class="app-container">
-  <md-sidenav #sidenav_id mode="side" opened="true" class="sidenav-container">
+  <md-sidenav #sidenav_id mode="side" opened="false" class="sidenav-container">
 
     <!-- sidenav content -->
-    <button md-button class="menu-button">Applications</button>
-    <button md-button class="menu-button">Audit logs</button>
+    <button md-button class="menu-button" routerLink="/applications">Applications</button>
+    <button md-button class="menu-button" routerLink="/audit-logs">Audit logs</button>
     <button md-button class="menu-button">Performance counters</button>
 
   </md-sidenav>

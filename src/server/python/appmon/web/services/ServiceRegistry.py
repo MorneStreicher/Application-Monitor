@@ -29,4 +29,3 @@ class ServiceRegistry(object):
         service_name = service_name or ""
         service_entity = service_entity or ""
         return "{Type:%s;Name:%s;Entity:%s}" % (service_type.lower(), service_name.lower(), service_entity.lower())
-

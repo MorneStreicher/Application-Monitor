@@ -1,0 +1,12 @@
+<div class="header">
+  <md-select placeholder="Select application">
+    <md-option *ngFor="let cur of appOptions" [value]="cur.value">
+      {{ cur.value }}
+    </md-option>
+  </md-select>
+</div>
+
+<div class="content">
+  <sdk-grid #grid style="width: 100%; height: 100%;">
+  </sdk-grid>
+</div>

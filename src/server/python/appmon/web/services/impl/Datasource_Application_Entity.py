@@ -1,5 +1,28 @@
+from appmon.db.DBEntities import DBEntities
+from appmon.db.DBSession import DBSession
 from appmon.web.services.ServiceBase import DatasourceService, DatasourceQueryResult
-import time
+
+
+class Record(object):
+    def __init__(self):
+        self.id = None
+        self.app_domain = None
+        self.name = None
+        self.entity = None
+        self.last_heartbeat = None
+        self.app_type = None
+        self.current_activity = None
+
+    def fromEntity(self, entity):
+        self.id = entity.gid
+        self.app_domain = entity.app_domain
+        self.name = entity.name
+        self.entity = entity.entity
+        self.last_heartbeat = entity.last_heartbeat
+        self.app_type = entity.app_type
+        self.current_activity = entity.current_activity
+        return self.__dict__
+
 
 class Service(DatasourceService):
     def __init__(self):
@@ -8,9 +31,11 @@ class Service(DatasourceService):
     def query(self, dict_filter, order_by, start_index, count):
         start_index = start_index or 0
         records = []
-        for x in range(start_index, start_index + (count or 2000)):
-            records.append({"id":"%s" % x, "name" : "Application %s Name" % x})
-        result = DatasourceQueryResult(records=records, has_more_records=True)
+        with DBSession.session_scope() as session:
+            list = session.query(DBEntities.Application).all()
+            for cur in list:
+                records.append(Record().fromEntity(cur))
+        result = DatasourceQueryResult(records=records, has_more_records=False)
         return result
 
     def update(self, record):
