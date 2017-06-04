@@ -72,6 +72,9 @@ SELECT * FROM application
 GO
 
 INSERT INTO audit_log_entry(app_gid, datetime_logged, level, log_description) VALUES ('00000001-3c05-11e7-a467-080027152214', '2017-05-15 13:00:00', 1, 'Some description for this log entry');
+INSERT INTO audit_log_entry(app_gid, datetime_logged, level, log_description) VALUES ('00000001-3c05-11e7-a467-080027152214', '2017-05-15 13:00:00', 2, 'Some description for this log entry');
+INSERT INTO audit_log_entry(app_gid, datetime_logged, level, log_description) VALUES ('00000001-3c05-11e7-a467-080027152214', '2017-05-15 13:00:00', 3, 'Some description for this log entry');
+INSERT INTO audit_log_entry(app_gid, datetime_logged, level, log_description) VALUES ('00000001-3c05-11e7-a467-080027152214', '2017-05-15 13:00:00', 4, 'Some description for this log entry');
 GO
 
 SELECT * FROM audit_log_entry;

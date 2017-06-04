@@ -103,6 +103,91 @@ var _a;
 
 /***/ }),
 
+/***/ 112:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(56);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SdkDialogButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SdkDialogConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkDialogManagerComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var SdkDialogButton = (function () {
+    function SdkDialogButton(name, autoClose) {
+        if (name === void 0) { name = "Default button name"; }
+        if (autoClose === void 0) { autoClose = false; }
+        this.name = name;
+        this.autoClose = autoClose;
+    }
+    return SdkDialogButton;
+}());
+
+var SdkDialogConfig = (function () {
+    function SdkDialogConfig() {
+        this.title = "Application";
+        this.mdDialogConfig = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MdDialogConfig */]();
+        this.buttonConfig = [];
+    }
+    return SdkDialogConfig;
+}());
+
+var SdkDialogManagerComponent = (function () {
+    function SdkDialogManagerComponent(dialogRef, config, _componentFactoryResolver, injector) {
+        this.dialogRef = dialogRef;
+        this.config = config;
+        this._componentFactoryResolver = _componentFactoryResolver;
+        this.injector = injector;
+        this.buttonConfig = [];
+    }
+    SdkDialogManagerComponent.prototype.ngOnInit = function () {
+        var componentFactory = this._componentFactoryResolver.resolveComponentFactory(this.config.component);
+        var comp = componentFactory.create(this.injector);
+        comp.instance.setData(this.config.data);
+        this.divContent.insert(comp.hostView);
+        for (var i in this.config.buttonConfig) {
+            this.buttonConfig.push(this.config.buttonConfig[i]);
+        }
+    };
+    SdkDialogManagerComponent.prototype.onButtonClick = function (buttonConfig) {
+        console.log(buttonConfig);
+        if (buttonConfig.autoClose) {
+            this.dialogRef.close();
+        }
+    };
+    return SdkDialogManagerComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])("divContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] }),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]) === "function" && _a || Object)
+], SdkDialogManagerComponent.prototype, "divContent", void 0);
+SdkDialogManagerComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        template: __webpack_require__(366),
+        styles: [__webpack_require__(357)]
+    }),
+    __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MD_DIALOG_DATA */])),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MdDialogRef */]) === "function" && _b || Object, SdkDialogConfig, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"]) === "function" && _d || Object])
+], SdkDialogManagerComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=sdkdialog.component.js.map
+
+/***/ }),
+
 /***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -216,6 +301,10 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sdk_adapter_md_select_adapter__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__audit_entry_audit_entry_component__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(112);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ViewCellComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuditLogsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -230,6 +319,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+var ViewCellComponent = (function () {
+    function ViewCellComponent(dialog) {
+        this.dialog = dialog;
+    }
+    ViewCellComponent.prototype.agInit = function (params) {
+        console.log(params);
+        this.params = params;
+    };
+    ViewCellComponent.prototype.onClick = function () {
+        console.log("Clicked:", this.params);
+        var config = new __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__["b" /* SdkDialogConfig */]();
+        config.mdDialogConfig.disableClose = true;
+        config.mdDialogConfig.width = "800px";
+        config.mdDialogConfig.height = "600px";
+        config.title = "Audit log entry";
+        config.component = __WEBPACK_IMPORTED_MODULE_6__audit_entry_audit_entry_component__["a" /* AuditEntryComponent */];
+        config.data = this.params.data;
+        config.buttonConfig.push(new __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__["c" /* SdkDialogButton */]("OK", true));
+        this.dialog.open(config);
+    };
+    return ViewCellComponent;
+}());
+ViewCellComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        template: "<button md-button (click)=\"onClick();\">View</button>",
+        styles: [
+            "button {\n      min-height: 18px !important;\n      min-width: 46px !important;\n      font-size: 10px !important;\n      line-height: 0px;\n    }"
+        ]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5__sdk_sdkdialog_sdk_dialog_service__["a" /* SdkDialogService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__sdk_sdkdialog_sdk_dialog_service__["a" /* SdkDialogService */]) === "function" && _a || Object])
+], ViewCellComponent);
 
 var AuditLogsComponent = (function () {
     function AuditLogsComponent(datasource_service_factory) {
@@ -277,6 +401,12 @@ var AuditLogsComponent = (function () {
                 headerName: "Description",
                 field: "log_description",
                 width: 500
+            },
+            {
+                headerName: "",
+                field: "",
+                width: 60,
+                cellRendererFramework: ViewCellComponent
             }
         ];
         this.grid.agGrid.gridOptions = gridOptions;
@@ -302,17 +432,17 @@ var AuditLogsComponent = (function () {
 }());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('grid'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__["a" /* SdkGridComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__["a" /* SdkGridComponent */]) === "function" && _a || Object)
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__["a" /* SdkGridComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__["a" /* SdkGridComponent */]) === "function" && _b || Object)
 ], AuditLogsComponent.prototype, "grid", void 0);
 AuditLogsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         template: __webpack_require__(364),
         styles: [__webpack_require__(355)]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */]) === "function" && _c || Object])
 ], AuditLogsComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=audit-logs.component.js.map
 
 /***/ }),
@@ -400,6 +530,46 @@ __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdkdialog_component__ = __webpack_require__(112);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkDialogService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SdkDialogService = (function () {
+    function SdkDialogService(dialog) {
+        this.dialog = dialog;
+    }
+    SdkDialogService.prototype.open = function (config) {
+        config.mdDialogConfig.data = config;
+        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2__sdkdialog_component__["a" /* SdkDialogManagerComponent */], config.mdDialogConfig);
+    };
+    return SdkDialogService;
+}());
+SdkDialogService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MdDialog */]) === "function" && _a || Object])
+], SdkDialogService);
+
+var _a;
+//# sourceMappingURL=sdk-dialog.service.js.map
+
+/***/ }),
+
+/***/ 180:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Dialog1Component; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -426,8 +596,8 @@ var Dialog1Component = (function () {
 }());
 Dialog1Component = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        template: __webpack_require__(366),
-        styles: [__webpack_require__(357)]
+        template: __webpack_require__(367),
+        styles: [__webpack_require__(358)]
     }),
     __metadata("design:paramtypes", [])
 ], Dialog1Component);
@@ -441,9 +611,9 @@ Dialog1Component = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dialog1_dialog1_component__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dialog1_dialog1_component__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(179);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TestComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -719,6 +889,9 @@ var ApplicationsModule_1;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__audit_entry_audit_entry_component__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_flex_layout__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_forms__ = __webpack_require__(174);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuditLogsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -726,6 +899,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -746,13 +922,23 @@ AuditLogsModule = AuditLogsModule_1 = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__["a" /* SdkModule */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_material__["f" /* MdSelectModule */]
+            __WEBPACK_IMPORTED_MODULE_4__angular_material__["f" /* MdSelectModule */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MdButtonModule */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_material__["l" /* MdInputModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_flex_layout__["a" /* FlexLayoutModule */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_forms__["a" /* FormsModule */]
         ],
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__["a" /* AuditLogsComponent */]
+            __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__["a" /* AuditLogsComponent */],
+            __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__["b" /* ViewCellComponent */],
+            __WEBPACK_IMPORTED_MODULE_5__audit_entry_audit_entry_component__["a" /* AuditEntryComponent */]
         ],
         exports: [
             __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__["a" /* AuditLogsComponent */]
+        ],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__["b" /* ViewCellComponent */],
+            __WEBPACK_IMPORTED_MODULE_5__audit_entry_audit_entry_component__["a" /* AuditEntryComponent */]
         ]
     })
 ], AuditLogsModule);
@@ -803,9 +989,9 @@ var MdSelectAdapter = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__ = __webpack_require__(175);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dialog1_dialog1_component__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dialog1_dialog1_component__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(179);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TestModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -965,6 +1151,24 @@ exports = module.exports = __webpack_require__(22)(false);
 
 
 // module
+exports.push([module.i, ".div-content {\r\n  position: absolute;\r\n  width: 100%;\r\n  bottom: 64px;\r\n  top:65px;\r\n  overflow: auto;\r\n}\r\n\r\n.div-content-inner {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.div-bottom {\r\n  position: absolute;\r\n  width: 100%;\r\n  bottom: 0px;\r\n  height:64px;\r\n  background-color: #f5f5f5;\r\n  border-top: 1px solid lightgray;\r\n}\r\n\r\n.div-bottom-inner {\r\n  position: absolute;\r\n  left: 0px;\r\n  right: 20px;\r\n  height: 100%;\r\n  text-align: right;\r\n  line-height: 64px;\r\n}\r\n\r\n.bottom-button {\r\n  margin: 5px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 358:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)(false);
+// imports
+
+
+// module
 exports.push([module.i, "", ""]);
 
 // exports
@@ -1024,6 +1228,13 @@ module.exports = "<div [ngClass]=\"showToolDiv ? 'grid-div-show-toolbar' : 'grid
 /***/ 366:
 /***/ (function(module, exports) {
 
+module.exports = "<md-toolbar color=\"secondary\">\r\n  <span>{{config.title}}</span>\r\n</md-toolbar>\r\n\r\n<div class=\"div-content\">\r\n  <div #divContent class=\"div-content-inner\">\r\n\r\n  </div>\r\n</div>\r\n\r\n<div class=\"div-bottom\">\r\n  <div class=\"div-bottom-inner\">\r\n   <button md-raised-button *ngFor=\"let cur of buttonConfig\" (click)=\"onButtonClick(cur);\" class=\"bottom-button\">\r\n     {{cur.name}}\r\n   </button>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ 367:
+/***/ (function(module, exports) {
+
 module.exports = "Hello dialog component....\n\n{{ obj.data }}\n"
 
 /***/ }),
@@ -1048,10 +1259,7 @@ module.exports = __webpack_require__(250);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(56);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SdkDialogButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SdkDialogConfig; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkDialogManagerComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuditEntryComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1061,114 +1269,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 
-
-var SdkDialogButton = (function () {
-    function SdkDialogButton(name, autoClose) {
-        if (name === void 0) { name = "Default button name"; }
-        if (autoClose === void 0) { autoClose = false; }
-        this.name = name;
-        this.autoClose = autoClose;
+var AuditEntryComponent = (function () {
+    function AuditEntryComponent() {
+        this.obj = { data: {} };
     }
-    return SdkDialogButton;
-}());
-
-var SdkDialogConfig = (function () {
-    function SdkDialogConfig() {
-        this.title = "Application";
-        this.mdDialogConfig = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MdDialogConfig */]();
-        this.buttonConfig = [];
-    }
-    return SdkDialogConfig;
-}());
-
-var SdkDialogManagerComponent = (function () {
-    function SdkDialogManagerComponent(dialogRef, config, _componentFactoryResolver, injector) {
-        this.dialogRef = dialogRef;
-        this.config = config;
-        this._componentFactoryResolver = _componentFactoryResolver;
-        this.injector = injector;
-        this.buttonConfig = [];
-    }
-    SdkDialogManagerComponent.prototype.ngOnInit = function () {
-        var componentFactory = this._componentFactoryResolver.resolveComponentFactory(this.config.component);
-        var comp = componentFactory.create(this.injector);
-        comp.instance.setData(this.config.data);
-        this.divContent.insert(comp.hostView);
-        for (var i in this.config.buttonConfig) {
-            this.buttonConfig.push(this.config.buttonConfig[i]);
-        }
+    AuditEntryComponent.prototype.setData = function (data) {
+        this.obj.data = data;
     };
-    SdkDialogManagerComponent.prototype.onButtonClick = function (buttonConfig) {
-        console.log(buttonConfig);
-        if (buttonConfig.autoClose) {
-            this.dialogRef.close();
-        }
-    };
-    return SdkDialogManagerComponent;
+    return AuditEntryComponent;
 }());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])("divContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] }),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]) === "function" && _a || Object)
-], SdkDialogManagerComponent.prototype, "divContent", void 0);
-SdkDialogManagerComponent = __decorate([
+AuditEntryComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        template: __webpack_require__(427),
-        styles: [__webpack_require__(426)]
+        selector: 'app-audit-entry',
+        template: __webpack_require__(426),
+        styles: [__webpack_require__(425)]
     }),
-    __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MD_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MdDialogRef */]) === "function" && _b || Object, SdkDialogConfig, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"]) === "function" && _d || Object])
-], SdkDialogManagerComponent);
+    __metadata("design:paramtypes", [])
+], AuditEntryComponent);
 
-var _a, _b, _c, _d;
-//# sourceMappingURL=sdkdialog.component.js.map
+//# sourceMappingURL=audit-entry.component.js.map
 
 /***/ }),
 
 /***/ 425:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdkdialog_component__ = __webpack_require__(424);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkDialogService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var SdkDialogService = (function () {
-    function SdkDialogService(dialog) {
-        this.dialog = dialog;
-    }
-    SdkDialogService.prototype.open = function (config) {
-        config.mdDialogConfig.data = config;
-        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2__sdkdialog_component__["a" /* SdkDialogManagerComponent */], config.mdDialogConfig);
-    };
-    return SdkDialogService;
-}());
-SdkDialogService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MdDialog */]) === "function" && _a || Object])
-], SdkDialogService);
-
-var _a;
-//# sourceMappingURL=sdk-dialog.service.js.map
-
-/***/ }),
-
-/***/ 426:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(22)(false);
@@ -1176,7 +1300,7 @@ exports = module.exports = __webpack_require__(22)(false);
 
 
 // module
-exports.push([module.i, ".div-content {\r\n  position: absolute;\r\n  width: 100%;\r\n  bottom: 64px;\r\n  top:65px;\r\n  overflow: auto;\r\n}\r\n\r\n.div-content-inner {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.div-bottom {\r\n  position: absolute;\r\n  width: 100%;\r\n  bottom: 0px;\r\n  height:64px;\r\n  background-color: #f5f5f5;\r\n  border-top: 1px solid lightgray;\r\n}\r\n\r\n.div-bottom-inner {\r\n  position: absolute;\r\n  left: 0px;\r\n  right: 20px;\r\n  height: 100%;\r\n  text-align: right;\r\n  line-height: 64px;\r\n}\r\n\r\n.bottom-button {\r\n  margin: 5px;\r\n}\r\n", ""]);
+exports.push([module.i, ".div-container {\r\n  padding: 10px;\r\n}\r\n\r\n.width-100perc {\r\n  width: 100%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1186,10 +1310,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 427:
+/***/ 426:
 /***/ (function(module, exports) {
 
-module.exports = "<md-toolbar color=\"secondary\">\r\n  <span>{{config.title}}</span>\r\n</md-toolbar>\r\n\r\n<div class=\"div-content\">\r\n  <div #divContent class=\"div-content-inner\">\r\n\r\n  </div>\r\n</div>\r\n\r\n<div class=\"div-bottom\">\r\n  <div class=\"div-bottom-inner\">\r\n   <button md-raised-button *ngFor=\"let cur of buttonConfig\" (click)=\"onButtonClick(cur);\" class=\"bottom-button\">\r\n     {{cur.name}}\r\n   </button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"div-container\">\n<div fxLayout=\"column\" fxLayoutGap=\"0px\">\n  <div >\n\n\n    <div fxLayout=\"row\">\n      <div fxFlex=\"2 1 auto\">\n        <md-input-container class=\"width-100perc\">\n          <input mdInput name=\"datetime_logged\" placeholder=\"Date/Time logged\"\n                 [(ngModel)]=\"obj.data.datetime_logged\" required readonly>\n          <md-error>This field is required</md-error>\n        </md-input-container>\n      </div>\n      <div fxFlex=\"1 1 auto\">\n        <md-input-container class=\"width-100perc\">\n          <input mdInput name=\"level_description\" placeholder=\"Level\"\n                 [(ngModel)]=\"obj.data.level_description\" required readonly>\n          <md-error>This field is required</md-error>\n        </md-input-container>\n      </div>\n    </div>\n\n\n  </div>\n  <div>\n    <md-input-container class=\"width-100perc\">\n      <textarea rows=\"18\" mdInput name=\"description\" placeholder=\"Description\" style=\"resize: none\"\n                [(ngModel)]=\"obj.data.log_description\" required readonly></textarea>\n      <md-error>This field is required</md-error>\n    </md-input-container>\n  </div>\n</div>\n\n</div>\n"
 
 /***/ }),
 
