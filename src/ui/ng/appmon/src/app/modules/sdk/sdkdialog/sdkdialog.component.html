@@ -1,0 +1,17 @@
+<md-toolbar color="secondary">
+  <span>{{config.title}}</span>
+</md-toolbar>
+
+<div class="div-content">
+  <div #divContent class="div-content-inner">
+
+  </div>
+</div>
+
+<div class="div-bottom">
+  <div class="div-bottom-inner">
+   <button md-raised-button *ngFor="let cur of buttonConfig" (click)="onButtonClick(cur);" class="bottom-button">
+     {{cur.name}}
+   </button>
+  </div>
+</div>

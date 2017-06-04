@@ -1,13 +1,116 @@
 webpackJsonp([1,4],{
 
-/***/ 146:
+/***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__ = __webpack_require__(148);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkGridComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SdkGridComponent = (function () {
+    function SdkGridComponent() {
+        this.leftButtonDisabled = true;
+        this.rightButtonDisabled = true;
+        this.showToolDiv = true;
+        this.start_index = 0;
+        this.row_count = null;
+    }
+    SdkGridComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.agGrid.rowSelected.subscribe(function (o) {
+            _this.agGrid.api.refreshRows([o.node]);
+        });
+        this.agGrid.rowDoubleClicked.subscribe(function (o) {
+            console.log(o);
+        });
+    };
+    SdkGridComponent.prototype.ngAfterViewInit = function () {
+        this.agGrid.api.hideOverlay();
+    };
+    SdkGridComponent.prototype.setRowCount = function (count) {
+        this.row_count = count;
+    };
+    SdkGridComponent.prototype.setDataSet = function (dataset, query_data) {
+        var _this = this;
+        if (query_data === void 0) { query_data = true; }
+        this.dataset = dataset;
+        this.dataset.datasetLoaded.subscribe(function (queryResult) {
+            _this.populateGrid();
+            _this.agGrid.api.hideOverlay();
+        });
+        if (query_data) {
+            dataset.query(0, this.row_count);
+        }
+    };
+    SdkGridComponent.prototype.populateGrid = function () {
+        var r = this.dataset.getDatasourceQueryResult();
+        var rowData = r.records;
+        this.agGrid.api.setRowData(rowData);
+        this.setPagingButtons(r.has_more_records, r.has_previous_records);
+    };
+    SdkGridComponent.prototype.setPagingButtons = function (has_more_records, has_previous_records) {
+        this.rightButtonDisabled = !has_more_records;
+        this.leftButtonDisabled = !has_previous_records;
+    };
+    SdkGridComponent.prototype.rightButtonClick = function () {
+        this.setPagingButtons(false, false);
+        var r = this.dataset.getDatasourceQueryResult();
+        this.start_index = this.start_index + (r ? r.records.length.valueOf() : 0);
+        this.agGrid.api.showLoadingOverlay();
+        this.dataset.query(this.start_index, this.row_count);
+    };
+    SdkGridComponent.prototype.leftButtonClick = function () {
+        this.setPagingButtons(false, false);
+        var r = this.dataset.getDatasourceQueryResult();
+        this.start_index = this.start_index - (this.row_count ? this.row_count.valueOf() : 0);
+        this.start_index = this.start_index < 0 ? 0 : this.start_index;
+        this.agGrid.api.showLoadingOverlay();
+        this.dataset.query(this.start_index, this.row_count);
+    };
+    return SdkGridComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('agGrid'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__["AgGridNg2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__["AgGridNg2"]) === "function" && _a || Object)
+], SdkGridComponent.prototype, "agGrid", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('toolDiv'),
+    __metadata("design:type", Object)
+], SdkGridComponent.prototype, "toolDiv", void 0);
+SdkGridComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'sdk-grid',
+        template: __webpack_require__(365),
+        styles: [__webpack_require__(356)]
+    }),
+    __metadata("design:paramtypes", [])
+], SdkGridComponent);
+
+var _a;
+//# sourceMappingURL=sdkgrid.component.js.map
+
+/***/ }),
+
+/***/ 176:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__ = __webpack_require__(79);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApplicationsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -93,8 +196,8 @@ __decorate([
 ], ApplicationsComponent.prototype, "grid", void 0);
 ApplicationsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        template: __webpack_require__(313),
-        styles: [__webpack_require__(307)]
+        template: __webpack_require__(363),
+        styles: [__webpack_require__(354)]
     }),
     __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */]) === "function" && _b || Object])
 ], ApplicationsComponent);
@@ -104,15 +207,15 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 147:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__ = __webpack_require__(148);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sdk_adapter_md_select_adapter__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_components_sdkgrid_component__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdk_model_dataset__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sdk_adapter_md_select_adapter__ = __webpack_require__(278);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuditLogsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -203,8 +306,8 @@ __decorate([
 ], AuditLogsComponent.prototype, "grid", void 0);
 AuditLogsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        template: __webpack_require__(314),
-        styles: [__webpack_require__(308)]
+        template: __webpack_require__(364),
+        styles: [__webpack_require__(355)]
     }),
     __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__sdk_services_datasource_service__["a" /* DatasourceFactoryService */]) === "function" && _b || Object])
 ], AuditLogsComponent);
@@ -214,12 +317,12 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 148:
+/***/ 178:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_datasource_service__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_datasource_service__ = __webpack_require__(79);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataSet; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -292,7 +395,103 @@ __decorate([
 
 /***/ }),
 
-/***/ 216:
+/***/ 179:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Dialog1Component; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var Dialog1Component = (function () {
+    function Dialog1Component() {
+        this.obj = {
+            data: ""
+        };
+        console.log("in Dialog1Component constructor");
+        this.obj.data = "1";
+    }
+    Dialog1Component.prototype.setData = function (data) {
+        this.obj.data = data;
+    };
+    return Dialog1Component;
+}());
+Dialog1Component = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        template: __webpack_require__(366),
+        styles: [__webpack_require__(357)]
+    }),
+    __metadata("design:paramtypes", [])
+], Dialog1Component);
+
+//# sourceMappingURL=dialog1.component.js.map
+
+/***/ }),
+
+/***/ 181:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dialog1_dialog1_component__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(425);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TestComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var TestComponent = (function () {
+    function TestComponent(dialog) {
+        this.dialog = dialog;
+    }
+    TestComponent.prototype.ngOnInit = function () {
+    };
+    TestComponent.prototype.openDialog = function () {
+        var config = new __WEBPACK_IMPORTED_MODULE_1__sdk_sdkdialog_sdkdialog_component__["b" /* SdkDialogConfig */]();
+        config.mdDialogConfig.disableClose = true;
+        config.mdDialogConfig.width = "800px";
+        config.mdDialogConfig.height = "600px";
+        config.title = "My test dialog instance";
+        config.component = __WEBPACK_IMPORTED_MODULE_2__dialog1_dialog1_component__["a" /* Dialog1Component */];
+        config.data = "Hello from me!";
+        config.buttonConfig.push(new __WEBPACK_IMPORTED_MODULE_1__sdk_sdkdialog_sdkdialog_component__["c" /* SdkDialogButton */]("OK", true));
+        config.buttonConfig.push(new __WEBPACK_IMPORTED_MODULE_1__sdk_sdkdialog_sdkdialog_component__["c" /* SdkDialogButton */]("Cancel", false));
+        this.dialog.open(config);
+    };
+    return TestComponent;
+}());
+TestComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        template: __webpack_require__(368),
+        styles: [__webpack_require__(359)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__sdk_sdkdialog_sdk_dialog_service__["a" /* SdkDialogService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__sdk_sdkdialog_sdk_dialog_service__["a" /* SdkDialogService */]) === "function" && _a || Object])
+], TestComponent);
+
+var _a;
+//# sourceMappingURL=test.component.js.map
+
+/***/ }),
+
+/***/ 249:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -301,20 +500,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 216;
+webpackEmptyContext.id = 249;
 
 
 /***/ }),
 
-/***/ 217:
+/***/ 250:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_core_app_module__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_core_app_module__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(280);
 
 
 
@@ -327,11 +526,11 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 228:
+/***/ 274:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -351,8 +550,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__(312),
-        styles: [__webpack_require__(306)]
+        template: __webpack_require__(362),
+        styles: [__webpack_require__(353)]
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);
@@ -361,23 +560,26 @@ AppComponent = __decorate([
 
 /***/ }),
 
-/***/ 229:
+/***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_material__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_sdk_sdk_module__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_applications_applications_module__ = __webpack_require__(230);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_applications_applications_component__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_audit_logs_audit_logs_module__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_audit_logs_audit_logs_component__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_material__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_flex_layout__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_sdk_sdk_module__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_applications_applications_module__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_applications_applications_component__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_audit_logs_audit_logs_module__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_audit_logs_audit_logs_component__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_test_test_module__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_test_test_component__ = __webpack_require__(181);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -398,14 +600,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
 var appRoutes = [
     {
         path: 'applications',
-        component: __WEBPACK_IMPORTED_MODULE_10__modules_applications_applications_component__["a" /* ApplicationsComponent */]
+        component: __WEBPACK_IMPORTED_MODULE_11__modules_applications_applications_component__["a" /* ApplicationsComponent */]
     },
     {
         path: 'audit-logs',
-        component: __WEBPACK_IMPORTED_MODULE_12__modules_audit_logs_audit_logs_component__["a" /* AuditLogsComponent */]
+        component: __WEBPACK_IMPORTED_MODULE_13__modules_audit_logs_audit_logs_component__["a" /* AuditLogsComponent */]
+    },
+    {
+        path: 'test',
+        component: __WEBPACK_IMPORTED_MODULE_15__modules_test_test_component__["a" /* TestComponent */]
     },
     {
         path: '',
@@ -421,16 +630,18 @@ var AppModule = (function () {
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_flex_layout__["a" /* FlexLayoutModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* RouterModule */].forRoot(appRoutes),
-            __WEBPACK_IMPORTED_MODULE_8__modules_sdk_sdk_module__["a" /* SdkModule */].forRoot(),
-            __WEBPACK_IMPORTED_MODULE_9__modules_applications_applications_module__["a" /* ApplicationsModule */].forRoot(),
-            __WEBPACK_IMPORTED_MODULE_11__modules_audit_logs_audit_logs_module__["a" /* AuditLogsModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_9__modules_sdk_sdk_module__["a" /* SdkModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_10__modules_applications_applications_module__["a" /* ApplicationsModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_12__modules_audit_logs_audit_logs_module__["a" /* AuditLogsModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_14__modules_test_test_module__["a" /* TestModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
             __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MdButtonModule */],
             __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MdCheckboxModule */],
@@ -441,7 +652,7 @@ AppModule = __decorate([
         ],
         providers: [],
         bootstrap: [
-            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */]
         ]
     })
 ], AppModule);
@@ -450,14 +661,14 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 230:
+/***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_component__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_component__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__ = __webpack_require__(78);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApplicationsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -499,15 +710,15 @@ var ApplicationsModule_1;
 
 /***/ }),
 
-/***/ 231:
+/***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__audit_logs_component__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(56);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuditLogsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -551,7 +762,7 @@ var AuditLogsModule_1;
 
 /***/ }),
 
-/***/ 232:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -581,7 +792,83 @@ var MdSelectAdapter = (function () {
 
 /***/ }),
 
-/***/ 233:
+/***/ 279:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__test_component__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dialog1_dialog1_component__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__sdk_sdkdialog_sdk_dialog_service__ = __webpack_require__(425);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TestModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+var TestModule = TestModule_1 = (function () {
+    function TestModule() {
+    }
+    TestModule.forRoot = function () {
+        return {
+            ngModule: TestModule_1
+        };
+    };
+    return TestModule;
+}());
+TestModule = TestModule_1 = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__["a" /* FlexLayoutModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["g" /* MdDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["a" /* MdButtonModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["c" /* MdToolbarModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MdIconModule */],
+            __WEBPACK_IMPORTED_MODULE_3__sdk_sdk_module__["a" /* SdkModule */]
+        ],
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__test_component__["a" /* TestComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__["a" /* SdkDialogManagerComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__dialog1_dialog1_component__["a" /* Dialog1Component */]
+        ],
+        exports: [
+            __WEBPACK_IMPORTED_MODULE_2__test_component__["a" /* TestComponent */]
+        ],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_8__dialog1_dialog1_component__["a" /* Dialog1Component */],
+            __WEBPACK_IMPORTED_MODULE_7__sdk_sdkdialog_sdkdialog_component__["a" /* SdkDialogManagerComponent */]
+        ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_9__sdk_sdkdialog_sdk_dialog_service__["a" /* SdkDialogService */]
+        ]
+    })
+], TestModule);
+
+var TestModule_1;
+//# sourceMappingURL=test.module.js.map
+
+/***/ }),
+
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -598,10 +885,10 @@ var environment = {
 
 /***/ }),
 
-/***/ 306:
+/***/ 353:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(31)(false);
+exports = module.exports = __webpack_require__(22)(false);
 // imports
 
 
@@ -616,10 +903,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 307:
+/***/ 354:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(31)(false);
+exports = module.exports = __webpack_require__(22)(false);
 // imports
 
 
@@ -634,10 +921,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 308:
+/***/ 355:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(31)(false);
+exports = module.exports = __webpack_require__(22)(false);
 // imports
 
 
@@ -652,10 +939,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 309:
+/***/ 356:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(31)(false);
+exports = module.exports = __webpack_require__(22)(false);
 // imports
 
 
@@ -670,48 +957,307 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 312:
-/***/ (function(module, exports) {
+/***/ 357:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<md-sidenav-container class=\"app-container\">\n  <md-sidenav #sidenav_id mode=\"side\" opened=\"false\" class=\"sidenav-container\">\n\n    <!-- sidenav content -->\n    <button md-button class=\"menu-button\" routerLink=\"/applications\">Applications</button>\n    <button md-button class=\"menu-button\" routerLink=\"/audit-logs\">Audit logs</button>\n    <button md-button class=\"menu-button\">Performance counters</button>\n\n  </md-sidenav>\n\n  <!-- primary content -->\n  <md-toolbar color=\"primary\">\n    <md-icon class=\"toolbar-icon pointer\" (click)=\"sidenav_id.toggle()\">menu</md-icon>\n      <span>Application Monitor</span>\n  </md-toolbar>\n\n  <div class = \"router-container\">\n    <router-outlet></router-outlet>\n  </div>\n\n</md-sidenav-container>\n\n"
+exports = module.exports = __webpack_require__(22)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 313:
+/***/ 359:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 362:
+/***/ (function(module, exports) {
+
+module.exports = "<md-sidenav-container class=\"app-container\">\n  <md-sidenav #sidenav_id mode=\"side\" opened=\"false\" class=\"sidenav-container\">\n\n    <!-- sidenav content -->\n    <button md-button class=\"menu-button\" routerLink=\"/applications\">Applications</button>\n    <button md-button class=\"menu-button\" routerLink=\"/audit-logs\">Audit logs</button>\n    <button md-button class=\"menu-button\">Performance counters</button>\n    <button md-button class=\"menu-button\" routerLink=\"/test\">Test</button>\n\n  </md-sidenav>\n\n  <!-- primary content -->\n  <md-toolbar color=\"primary\">\n    <md-icon class=\"toolbar-icon pointer\" (click)=\"sidenav_id.toggle()\">menu</md-icon>\n      <span>Application Monitor</span>\n  </md-toolbar>\n\n  <div class = \"router-container\">\n    <router-outlet></router-outlet>\n  </div>\n\n</md-sidenav-container>\n\n"
+
+/***/ }),
+
+/***/ 363:
 /***/ (function(module, exports) {
 
 module.exports = "<sdk-grid #grid style=\"width: 100%; height: 100%;\">\n</sdk-grid>\n"
 
 /***/ }),
 
-/***/ 314:
+/***/ 364:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"header\">\n  <md-select placeholder=\"Select application\">\n    <md-option *ngFor=\"let cur of appOptions\" [value]=\"cur.value\">\n      {{ cur.value }}\n    </md-option>\n  </md-select>\n</div>\n\n<div class=\"content\">\n  <sdk-grid #grid style=\"width: 100%; height: 100%;\">\n  </sdk-grid>\n</div>\n"
 
 /***/ }),
 
-/***/ 315:
+/***/ 365:
 /***/ (function(module, exports) {
 
 module.exports = "<div [ngClass]=\"showToolDiv ? 'grid-div-show-toolbar' : 'grid-div-hide-toolbar'\">\n  <ag-grid-angular #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\">\n  </ag-grid-angular>\n</div>\n\n<div #toolDiv [ngClass]=\"showToolDiv ? 'tool-div-show-toolbar' : 'tool-div-hide-toolbar'\">\n  <button md-button [disabled]=\"leftButtonDisabled\" (click)=\"leftButtonClick()\"><md-icon>keyboard_arrow_left</md-icon> Previous</button>\n  <button md-button [disabled]=\"rightButtonDisabled\" (click)=\"rightButtonClick()\">Next <md-icon>keyboard_arrow_right</md-icon></button>\n</div>\n"
 
 /***/ }),
 
-/***/ 371:
+/***/ 366:
+/***/ (function(module, exports) {
+
+module.exports = "Hello dialog component....\n\n{{ obj.data }}\n"
+
+/***/ }),
+
+/***/ 368:
+/***/ (function(module, exports) {
+
+module.exports = "<h3>Hello Test!</h3>\n<div fxLayout=\"column\" fxLayoutGap=\"0px\">\n  <div >Row 1</div>\n  <div>\n    <div fxLayout=\"row\">\n      <div fxFlex=\"2 1 auto\">Col 1</div>\n      <div fxFlex=\"1 1 auto\">Col 3</div>\n      <div fxFlex=\"1 1 auto\">Col 2</div>\n    </div>\n  </div>\n  <div>Row 3</div>\n  <div style=\"text-align: center;\">\n    <button md-raised-button (click)=\"openDialog();\">Open Dialog</button>\n  </div>\n  <div>Row 5</div>\n</div>\n"
+
+/***/ }),
+
+/***/ 422:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(217);
+module.exports = __webpack_require__(250);
 
 
 /***/ }),
 
-/***/ 68:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(56);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SdkDialogButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SdkDialogConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkDialogManagerComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var SdkDialogButton = (function () {
+    function SdkDialogButton(name, autoClose) {
+        if (name === void 0) { name = "Default button name"; }
+        if (autoClose === void 0) { autoClose = false; }
+        this.name = name;
+        this.autoClose = autoClose;
+    }
+    return SdkDialogButton;
+}());
+
+var SdkDialogConfig = (function () {
+    function SdkDialogConfig() {
+        this.title = "Application";
+        this.mdDialogConfig = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MdDialogConfig */]();
+        this.buttonConfig = [];
+    }
+    return SdkDialogConfig;
+}());
+
+var SdkDialogManagerComponent = (function () {
+    function SdkDialogManagerComponent(dialogRef, config, _componentFactoryResolver, injector) {
+        this.dialogRef = dialogRef;
+        this.config = config;
+        this._componentFactoryResolver = _componentFactoryResolver;
+        this.injector = injector;
+        this.buttonConfig = [];
+    }
+    SdkDialogManagerComponent.prototype.ngOnInit = function () {
+        var componentFactory = this._componentFactoryResolver.resolveComponentFactory(this.config.component);
+        var comp = componentFactory.create(this.injector);
+        comp.instance.setData(this.config.data);
+        this.divContent.insert(comp.hostView);
+        for (var i in this.config.buttonConfig) {
+            this.buttonConfig.push(this.config.buttonConfig[i]);
+        }
+    };
+    SdkDialogManagerComponent.prototype.onButtonClick = function (buttonConfig) {
+        console.log(buttonConfig);
+        if (buttonConfig.autoClose) {
+            this.dialogRef.close();
+        }
+    };
+    return SdkDialogManagerComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])("divContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] }),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]) === "function" && _a || Object)
+], SdkDialogManagerComponent.prototype, "divContent", void 0);
+SdkDialogManagerComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        template: __webpack_require__(427),
+        styles: [__webpack_require__(426)]
+    }),
+    __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MD_DIALOG_DATA */])),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MdDialogRef */]) === "function" && _b || Object, SdkDialogConfig, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"]) === "function" && _d || Object])
+], SdkDialogManagerComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=sdkdialog.component.js.map
+
+/***/ }),
+
+/***/ 425:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sdkdialog_component__ = __webpack_require__(424);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkDialogService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SdkDialogService = (function () {
+    function SdkDialogService(dialog) {
+        this.dialog = dialog;
+    }
+    SdkDialogService.prototype.open = function (config) {
+        config.mdDialogConfig.data = config;
+        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2__sdkdialog_component__["a" /* SdkDialogManagerComponent */], config.mdDialogConfig);
+    };
+    return SdkDialogService;
+}());
+SdkDialogService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MdDialog */]) === "function" && _a || Object])
+], SdkDialogService);
+
+var _a;
+//# sourceMappingURL=sdk-dialog.service.js.map
+
+/***/ }),
+
+/***/ 426:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".div-content {\r\n  position: absolute;\r\n  width: 100%;\r\n  bottom: 64px;\r\n  top:65px;\r\n  overflow: auto;\r\n}\r\n\r\n.div-content-inner {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.div-bottom {\r\n  position: absolute;\r\n  width: 100%;\r\n  bottom: 0px;\r\n  height:64px;\r\n  background-color: #f5f5f5;\r\n  border-top: 1px solid lightgray;\r\n}\r\n\r\n.div-bottom-inner {\r\n  position: absolute;\r\n  left: 0px;\r\n  right: 20px;\r\n  height: 100%;\r\n  text-align: right;\r\n  line-height: 64px;\r\n}\r\n\r\n.bottom-button {\r\n  margin: 5px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 427:
+/***/ (function(module, exports) {
+
+module.exports = "<md-toolbar color=\"secondary\">\r\n  <span>{{config.title}}</span>\r\n</md-toolbar>\r\n\r\n<div class=\"div-content\">\r\n  <div #divContent class=\"div-content-inner\">\r\n\r\n  </div>\r\n</div>\r\n\r\n<div class=\"div-bottom\">\r\n  <div class=\"div-bottom-inner\">\r\n   <button md-raised-button *ngFor=\"let cur of buttonConfig\" (click)=\"onButtonClick(cur);\" class=\"bottom-button\">\r\n     {{cur.name}}\r\n   </button>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ 78:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_sdkgrid_component__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_datasource_service__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__(56);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+var SdkModule = SdkModule_1 = (function () {
+    function SdkModule() {
+    }
+    SdkModule.forRoot = function () {
+        return {
+            ngModule: SdkModule_1
+        };
+    };
+    return SdkModule;
+}());
+SdkModule = SdkModule_1 = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main__["AgGridModule"].withComponents([]),
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["a" /* MdButtonModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MdIconModule */]
+        ],
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__components_sdkgrid_component__["a" /* SdkGridComponent */]
+        ],
+        exports: [
+            __WEBPACK_IMPORTED_MODULE_2__components_sdkgrid_component__["a" /* SdkGridComponent */]
+        ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_4__services_datasource_service__["a" /* DatasourceFactoryService */]
+        ]
+    })
+], SdkModule);
+
+var SdkModule_1;
+//# sourceMappingURL=sdk.module.js.map
+
+/***/ }),
+
+/***/ 79:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(110);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DatasourceQueryResult; });
 /* unused harmony export HttpDatasource */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DatasourceFactoryService; });
@@ -806,169 +1352,7 @@ DatasourceFactoryService = __decorate([
 var _a;
 //# sourceMappingURL=datasource.service.js.map
 
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkGridComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SdkGridComponent = (function () {
-    function SdkGridComponent() {
-        this.leftButtonDisabled = true;
-        this.rightButtonDisabled = true;
-        this.showToolDiv = true;
-        this.start_index = 0;
-        this.row_count = null;
-    }
-    SdkGridComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.agGrid.rowSelected.subscribe(function (o) {
-            _this.agGrid.api.refreshRows([o.node]);
-        });
-        this.agGrid.rowDoubleClicked.subscribe(function (o) {
-            console.log(o);
-        });
-    };
-    SdkGridComponent.prototype.ngAfterViewInit = function () {
-        this.agGrid.api.hideOverlay();
-    };
-    SdkGridComponent.prototype.setRowCount = function (count) {
-        this.row_count = count;
-    };
-    SdkGridComponent.prototype.setDataSet = function (dataset, query_data) {
-        var _this = this;
-        if (query_data === void 0) { query_data = true; }
-        this.dataset = dataset;
-        this.dataset.datasetLoaded.subscribe(function (queryResult) {
-            _this.populateGrid();
-            _this.agGrid.api.hideOverlay();
-        });
-        if (query_data) {
-            dataset.query(0, this.row_count);
-        }
-    };
-    SdkGridComponent.prototype.populateGrid = function () {
-        var r = this.dataset.getDatasourceQueryResult();
-        var rowData = r.records;
-        this.agGrid.api.setRowData(rowData);
-        this.setPagingButtons(r.has_more_records, r.has_previous_records);
-    };
-    SdkGridComponent.prototype.setPagingButtons = function (has_more_records, has_previous_records) {
-        this.rightButtonDisabled = !has_more_records;
-        this.leftButtonDisabled = !has_previous_records;
-    };
-    SdkGridComponent.prototype.rightButtonClick = function () {
-        this.setPagingButtons(false, false);
-        var r = this.dataset.getDatasourceQueryResult();
-        this.start_index = this.start_index + (r ? r.records.length.valueOf() : 0);
-        this.agGrid.api.showLoadingOverlay();
-        this.dataset.query(this.start_index, this.row_count);
-    };
-    SdkGridComponent.prototype.leftButtonClick = function () {
-        this.setPagingButtons(false, false);
-        var r = this.dataset.getDatasourceQueryResult();
-        this.start_index = this.start_index - (this.row_count ? this.row_count.valueOf() : 0);
-        this.start_index = this.start_index < 0 ? 0 : this.start_index;
-        this.agGrid.api.showLoadingOverlay();
-        this.dataset.query(this.start_index, this.row_count);
-    };
-    return SdkGridComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('agGrid'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__["AgGridNg2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ag_grid_angular__["AgGridNg2"]) === "function" && _a || Object)
-], SdkGridComponent.prototype, "agGrid", void 0);
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('toolDiv'),
-    __metadata("design:type", Object)
-], SdkGridComponent.prototype, "toolDiv", void 0);
-SdkGridComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'sdk-grid',
-        template: __webpack_require__(315),
-        styles: [__webpack_require__(309)]
-    }),
-    __metadata("design:paramtypes", [])
-], SdkGridComponent);
-
-var _a;
-//# sourceMappingURL=sdkgrid.component.js.map
-
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_sdkgrid_component__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_datasource_service__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__(95);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SdkModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-var SdkModule = SdkModule_1 = (function () {
-    function SdkModule() {
-    }
-    SdkModule.forRoot = function () {
-        return {
-            ngModule: SdkModule_1
-        };
-    };
-    return SdkModule;
-}());
-SdkModule = SdkModule_1 = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_3_ag_grid_angular_main__["AgGridModule"].withComponents([]),
-            __WEBPACK_IMPORTED_MODULE_5__angular_material__["a" /* MdButtonModule */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MdIconModule */]
-        ],
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__components_sdkgrid_component__["a" /* SdkGridComponent */]
-        ],
-        exports: [
-            __WEBPACK_IMPORTED_MODULE_2__components_sdkgrid_component__["a" /* SdkGridComponent */]
-        ],
-        providers: [
-            __WEBPACK_IMPORTED_MODULE_4__services_datasource_service__["a" /* DatasourceFactoryService */]
-        ]
-    })
-], SdkModule);
-
-var SdkModule_1;
-//# sourceMappingURL=sdk.module.js.map
-
 /***/ })
 
-},[371]);
+},[422]);
 //# sourceMappingURL=main.bundle.js.map

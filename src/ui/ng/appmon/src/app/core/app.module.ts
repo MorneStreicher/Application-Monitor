@@ -8,6 +8,7 @@ import {
   MdButtonModule, MdCheckboxModule, MdToolbarModule, MdIconModule, MdSidenavModule,
   MdSelectModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 
@@ -19,6 +20,9 @@ import { ApplicationsComponent } from "../modules/applications/applications.comp
 import { AuditLogsModule } from "../modules/audit-logs/audit-logs.module";
 import { AuditLogsComponent } from "../modules/audit-logs/audit-logs.component";
 
+import { TestModule } from "../modules/test/test.module";
+import { TestComponent } from "../modules/test/test.component";
+
 const appRoutes: Routes = [
   {
     path: 'applications',
@@ -27,6 +31,10 @@ const appRoutes: Routes = [
   {
     path: 'audit-logs',
     component: AuditLogsComponent
+  },
+  {
+    path: 'test',
+    component: TestComponent
   },
   {
     path: '',
@@ -44,11 +52,14 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
 
+    FlexLayoutModule,
+
     RouterModule.forRoot(appRoutes),
 
     SdkModule.forRoot(),
     ApplicationsModule.forRoot(),
     AuditLogsModule.forRoot(),
+    TestModule.forRoot(),
 
     BrowserAnimationsModule,
     MdButtonModule,
