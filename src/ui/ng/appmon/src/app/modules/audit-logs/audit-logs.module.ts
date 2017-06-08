@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {AuditLogsComponent, ViewCellComponent} from "./audit-logs.component";
 import { SdkModule } from "../sdk/sdk.module";
-import {MdButtonModule, MdInputModule, MdSelectModule} from "@angular/material";
+import {MdButtonModule, MdIconModule, MdInputModule, MdSelectModule} from "@angular/material";
 import { AuditEntryComponent } from './audit-entry/audit-entry.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
@@ -15,7 +15,8 @@ import {FormsModule} from "@angular/forms";
     MdButtonModule,
     MdInputModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    MdIconModule
   ],
   declarations: [
     AuditLogsComponent,

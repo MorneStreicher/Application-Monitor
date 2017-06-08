@@ -8,14 +8,14 @@ export class DataSet {
 
   private recordDecorator: (record:any) => void;
 
-  filter: object;
+  filter :any;
   order_by: String;
 
   private result: DatasourceQueryResult;
   private selectedId:String;
 
   constructor(private datasource:IDatasource) {
-    this.filter = null;
+    this.filter = {};
     this.order_by = null;
     this.result = new DatasourceQueryResult();
     this.selectedId = null;

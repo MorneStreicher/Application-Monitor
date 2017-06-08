@@ -29,13 +29,12 @@ class Service(DatasourceService):
         DatasourceService.__init__(self)
 
     def query(self, dict_filter, order_by, start_index, count):
-        start_index = start_index or 0
         records = []
         with DBSession.session_scope() as session:
             list = session.query(DBEntities.Application).all()
             for cur in list:
                 records.append(Record().fromEntity(cur))
-        result = DatasourceQueryResult(records=records, has_more_records=False)
+        result = DatasourceQueryResult(records=records)
         return result
 
     def update(self, record):

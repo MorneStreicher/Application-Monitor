@@ -74,6 +74,12 @@ class ServiceHandler(object):
         return json.dumps(result, cls=JSONEncoder)
 
 def start_server():
+    access_log = cherrypy.log.access_log
+    for handler in tuple(access_log.handlers):
+        access_log.removeHandler(handler)
+    cherrypy.log.error_log.propagate = False
+    cherrypy.log.access_log.propagate = False
+
     dn = os.path.dirname(os.path.realpath(__file__))
 
     conf = {

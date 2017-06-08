@@ -35,12 +35,18 @@ class Service(DatasourceService):
 
     def query(self, dict_filter, order_by, start_index, count):
         start_index = start_index or 0
+        count = count or 1000
         records = []
         with DBSession.session_scope() as session:
-            list = session.query(DBEntities.AuditLogEntry).all()
+            list = session.query(DBEntities.AuditLogEntry)
+            if "app_gid" in dict_filter:
+                list = list.filter(DBEntities.AuditLogEntry.app_gid == dict_filter["app_gid"])
+            list = list.offset(start_index)
+            list = list.limit(count + 1)
+            list = list.all()
             for cur in list:
                 records.append(Record().fromEntity(cur))
-        result = DatasourceQueryResult(records=records, has_more_records=False)
+        result = DatasourceQueryResult(records=records, count_requested=count)
         return result
 
     def update(self, record):

@@ -51,8 +51,16 @@ export class SdkGridComponent {
       this.agGrid.api.hideOverlay();
     });
     if (query_data) {
-      dataset.query(0, this.row_count);
+      this.queryDataSet();
     }
+  }
+
+  public queryDataSet() {
+    this.dataset.query(0, this.row_count);
+  }
+
+  public getDataSet():DataSet {
+    return this.dataset;
   }
 
   private populateGrid() {

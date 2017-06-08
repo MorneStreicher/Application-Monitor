@@ -1,9 +1,16 @@
 <div class="header">
-  <md-select placeholder="Select application">
-    <md-option *ngFor="let cur of appOptions" [value]="cur.value">
-      {{ cur.value }}
-    </md-option>
-  </md-select>
+  <div fxLayout="row">
+    <div fxFlex="1 1 auto">
+      <md-select placeholder="Select application" [(ngModel)]="selectedAppGid">
+        <md-option *ngFor="let cur of appOptions" [value]="cur.id">
+          {{ cur.value }}
+        </md-option>
+      </md-select>
+    </div>
+    <div fxFlex="1 1 auto">
+      <button md-raised-button (click)="onDoSearch();">Search <md-icon>search</md-icon></button>
+    </div>
+  </div>
 </div>
 
 <div class="content">

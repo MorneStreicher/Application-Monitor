@@ -78,3 +78,32 @@ INSERT INTO audit_log_entry(app_gid, datetime_logged, level, log_description) VA
 GO
 
 SELECT * FROM audit_log_entry;
+GO
+
+DROP PROCEDURE IF EXISTS temp_sp_popuate_log_entries
+GO
+
+CREATE PROCEDURE temp_sp_popuate_log_entries()
+BEGIN
+  DECLARE int_val INT DEFAULT 0;
+  test_loop : LOOP
+    IF (int_val = 10000) THEN
+      LEAVE test_loop;
+    END IF;
+    
+	INSERT INTO audit_log_entry(app_gid, datetime_logged, level, log_description) 
+	SELECT gid, CURRENT_TIMESTAMP(), MOD(RAND()*1000, 3) + 1, CONCAT('This is a detailed log entry number ',int_val,' for application ',name,', entity ',COALESCE(entity, ''),'. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. This is some additional text for this event entry. ')
+	FROM 	
+		application;
+
+    SET int_val = int_val +1;
+  END LOOP; 
+END
+GO
+
+call temp_sp_popuate_log_entries();
+GO
+
+
+SELECT * FROM audit_log_entry;
+GO

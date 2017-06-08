@@ -1,6 +1,6 @@
 webpackJsonp([2,4],{
 
-/***/ 103:
+/***/ 104:
 /***/ (function(module, exports) {
 
 /*
@@ -253,7 +253,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 22:
+/***/ 19:
 /***/ (function(module, exports) {
 
 /*
@@ -336,33 +336,6 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 252:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(349);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(103)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./indigo-pink.css", function() {
-			var newContent = require("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./indigo-pink.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ 253:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -372,14 +345,14 @@ if(false) {
 var content = __webpack_require__(350);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(103)(content, {});
+var update = __webpack_require__(104)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./ag-grid.css", function() {
-			var newContent = require("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./ag-grid.css");
+		module.hot.accept("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./indigo-pink.css", function() {
+			var newContent = require("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./indigo-pink.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -399,14 +372,14 @@ if(false) {
 var content = __webpack_require__(351);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(103)(content, {});
+var update = __webpack_require__(104)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./theme-fresh.css", function() {
-			var newContent = require("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./theme-fresh.css");
+		module.hot.accept("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./ag-grid.css", function() {
+			var newContent = require("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./ag-grid.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -426,7 +399,34 @@ if(false) {
 var content = __webpack_require__(352);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(103)(content, {});
+var update = __webpack_require__(104)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./theme-fresh.css", function() {
+			var newContent = require("!!../../../css-loader/index.js??ref--9-1!../../../postcss-loader/index.js??postcss!./theme-fresh.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 256:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(353);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(104)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -444,10 +444,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 349:
+/***/ 350:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(22)(false);
+exports = module.exports = __webpack_require__(19)(false);
 // imports
 
 
@@ -459,10 +459,10 @@ exports.push([module.i, ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0
 
 /***/ }),
 
-/***/ 350:
+/***/ 351:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(22)(false);
+exports = module.exports = __webpack_require__(19)(false);
 // imports
 
 
@@ -474,10 +474,10 @@ exports.push([module.i, "ag-grid-angular {\n  display: inline-block;\n}\nag-grid
 
 /***/ }),
 
-/***/ 351:
+/***/ 352:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(22)(false);
+exports = module.exports = __webpack_require__(19)(false);
 // imports
 
 
@@ -489,59 +489,59 @@ exports.push([module.i, ".ag-fresh {\n  line-height: 1.4;\n  font-family: \"Helv
 
 /***/ }),
 
-/***/ 352:
+/***/ 353:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(22)(false);
+exports = module.exports = __webpack_require__(19)(false);
 // imports
 
 
 // module
-exports.push([module.i, "body {\n  font-family: Roboto,\"Helvetica Neue\",sans-serif;\n}\n\n.main-app-div {\n  position: absolute;\n  left: 0px;\n  top:0px;\n  right:0px;\n  bottom: 0px;\n}\n\n/* Offline hosting of Google Material Icons */\n\n@font-face {\n  font-family: 'Material Icons';\n  font-style: normal;\n  font-weight: 400;\n  src: url(" + __webpack_require__(360) + "); /* For IE6-8 */\n  src: local('Material Icons'),\n  local('MaterialIcons-Regular'),\n  url(" + __webpack_require__(419) + ") format('woff2'),\n  url(" + __webpack_require__(418) + ") format('woff'),\n  url(" + __webpack_require__(417) + ") format('truetype');\n}\n\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;  /* Preferred icon size */\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n\n  /* Support for IE. */\n  -webkit-font-feature-settings: 'liga';\n          font-feature-settings: 'liga';\n}\n\n/* Custom override to get material 2 dialog to have no padding */\n\n.mat-dialog-container {\n  padding : 0px !important;\n}\n", ""]);
+exports.push([module.i, "body {\n  font-family: Roboto,\"Helvetica Neue\",sans-serif;\n}\n\n.main-app-div {\n  position: absolute;\n  left: 0px;\n  top:0px;\n  right:0px;\n  bottom: 0px;\n}\n\n/* Offline hosting of Google Material Icons */\n\n@font-face {\n  font-family: 'Material Icons';\n  font-style: normal;\n  font-weight: 400;\n  src: url(" + __webpack_require__(362) + "); /* For IE6-8 */\n  src: local('Material Icons'),\n  local('MaterialIcons-Regular'),\n  url(" + __webpack_require__(422) + ") format('woff2'),\n  url(" + __webpack_require__(421) + ") format('woff'),\n  url(" + __webpack_require__(420) + ") format('truetype');\n}\n\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;  /* Preferred icon size */\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n\n  /* Support for IE. */\n  -webkit-font-feature-settings: 'liga';\n          font-feature-settings: 'liga';\n}\n\n/* Custom override to get material 2 dialog to have no padding */\n\n.mat-dialog-container {\n  padding : 0px !important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 360:
+/***/ 362:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "MaterialIcons-Regular.e79bfd88537def476913.eot";
 
 /***/ }),
 
-/***/ 417:
+/***/ 420:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "MaterialIcons-Regular.a37b0c01c0baf1888ca8.ttf";
 
 /***/ }),
 
-/***/ 418:
+/***/ 421:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "MaterialIcons-Regular.3c3d0242794b4682460a.woff";
 
 /***/ }),
 
-/***/ 419:
+/***/ 422:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "MaterialIcons-Regular.c58629e330eaf128316a.woff2";
 
 /***/ }),
 
-/***/ 421:
+/***/ 424:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(252);
 __webpack_require__(253);
 __webpack_require__(254);
-module.exports = __webpack_require__(255);
+__webpack_require__(255);
+module.exports = __webpack_require__(256);
 
 
 /***/ })
 
-},[421]);
+},[424]);
 //# sourceMappingURL=styles.bundle.js.map

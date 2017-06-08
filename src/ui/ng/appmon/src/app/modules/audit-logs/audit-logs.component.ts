@@ -3,11 +3,11 @@ import { GridOptions } from "ag-grid";
 import { SdkGridComponent } from "../sdk/components/sdkgrid.component";
 import { DataSet } from "../sdk/model/dataset";
 import { DatasourceFactoryService } from "../sdk/services/datasource.service";
-import {MdSelectAdapter} from "../sdk/adapter/md-select.adapter";
-import {AgRendererComponent} from "ag-grid-angular";
-import {SdkDialogService} from "../sdk/sdkdialog/sdk-dialog.service";
-import {AuditEntryComponent} from "./audit-entry/audit-entry.component";
-import {SdkDialogButton, SdkDialogConfig} from "../sdk/sdkdialog/sdkdialog.component";
+import { MdSelectAdapter } from "../sdk/adapter/md-select.adapter";
+import { AgRendererComponent } from "ag-grid-angular";
+import { SdkDialogService } from "../sdk/sdkdialog/sdk-dialog.service";
+import { AuditEntryComponent } from "./audit-entry/audit-entry.component";
+import { SdkDialogButton, SdkDialogConfig } from "../sdk/sdkdialog/sdkdialog.component";
 
 @Component({
   template: `<button md-button (click)="onClick();">View</button>`,
@@ -29,13 +29,11 @@ export class ViewCellComponent implements AgRendererComponent {
   }
 
   agInit(params:any):void {
-    console.log(params);
+    // params is passed in by the agGrid component
     this.params = params;
   }
 
   onClick() {
-    console.log("Clicked:", this.params);
-
     let config = new SdkDialogConfig();
     config.mdDialogConfig.disableClose = true;
     config.mdDialogConfig.width="800px";
@@ -56,6 +54,7 @@ export class ViewCellComponent implements AgRendererComponent {
 })
 export class AuditLogsComponent {
   @ViewChild('grid') grid: SdkGridComponent;
+  public selectedAppGid:any;
 
   appOptions = [ ];
 
@@ -70,23 +69,9 @@ export class AuditLogsComponent {
     let gridOptions: GridOptions;
     gridOptions = {
       rowSelection: 'single',
+      enableColResize: true
+      // getRowStyle options are available here
 
-      getRowStyle: function(params) {
-        if (params.data.level == 2) {
-          return {
-            'background-color': 'yellow'
-          };
-        } else if (params.data.level == 3) {
-          return {
-            'background-color': '#FF7F50'
-          };
-        } else if (params.data.level == 4) {
-          return {
-            'background-color': 'red'
-          };
-        }
-        return null;
-      }
     };
 
     gridOptions.columnDefs = [
@@ -98,7 +83,23 @@ export class AuditLogsComponent {
       {
         headerName: "Level",
         field: "level_description",
-        width: 80
+        width: 80,
+        cellStyle: function(params) {
+          if (params.data.level == 2) {
+            return {
+              'background-color': 'yellow'
+            };
+          } else if (params.data.level == 3) {
+            return {
+              'background-color': '#FF7F50'
+            };
+          } else if (params.data.level == 4) {
+            return {
+              'background-color': 'red'
+            };
+          }
+          return null;
+        }
       },
       {
         headerName: "Description",
@@ -130,7 +131,13 @@ export class AuditLogsComponent {
     //
     let datasource = this.datasource_service_factory.getFor("AuditLogEntry", "Entity");
     let dataset = new DataSet(datasource);
-    this.grid.setRowCount(300);
+    dataset.filter.app_gid = "zzzzzzzz-yyyy-yyyy-xxxx-xxxxxxxxxxxx"; // A non existing GID
+    this.grid.setRowCount(100);
     this.grid.setDataSet(dataset, true);
+  }
+
+  onDoSearch() {
+    this.grid.getDataSet().filter.app_gid = this.selectedAppGid;
+    this.grid.queryDataSet();
   }
 }

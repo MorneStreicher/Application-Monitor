@@ -10,9 +10,13 @@ class ServiceBase(object):
 #
 
 class DatasourceQueryResult:
-    def __init__(self, records=[], has_more_records=False):
-        self.records = records
-        self.has_more_records = has_more_records
+    def __init__(self, records=[], count_requested=None):
+        if count_requested is None:
+            self.records = records
+            self.has_more_records = False
+        else:
+            self.records = records[0:count_requested]
+            self.has_more_records = len(records) > count_requested
 
     def to_dict(self):
         return self.__dict__
